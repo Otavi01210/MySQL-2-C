@@ -1,0 +1,29 @@
+-- cria banco de dados
+create database Hospital_Rápido;
+-- seleciona banco de dados
+use Hospital_Rápido;
+-- cria tabela
+create table if not exists paciente (
+  id_paciente int primary key auto_increment,
+  nome varchar(30) not null,
+  data_nascimento date not null,
+  altura float(3,2),
+  status_cadastro boolean default true,
+  genero enum('masculino','feminino','outro')
+);
+-- ver tabela
+desc paciente;
+create table if not exists consulta (
+ id_consulta int primary key auto_increment,
+ date_time datetime not null,
+ id_medico int,
+ id_paciente int,
+ foreign key (id_medico) references medico(id_medico),
+ foreign key (id_paciente) references paciente(id_paciente)
+);
+desc consulta;
+create table if not exists medico (
+   id int primary key auto_increment,
+   nome varchar(20) not null
+);
+desc medico;
